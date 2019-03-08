@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+    <head lang="ko">
+        <meta charset="utf-8">
+        <script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+        <link href="my_page_w.css" media="screen and (min-width:993px)" rel="stylesheet">
+        <link href="my_page_m.css" media="screen and (max-width:993px)" rel="stylesheet">
+        
+        <style>
+            @import url(my_page_w.css) screen and (min-width:993px);
+            @import url(my_page_m.css) screen and (max-width:992px);
+            
+            /*웹*/
+          @media (min-width:993px){
+          a:link { color: black; text-decoration: none;}
+          a:visited { color: black; text-decoration: none;}
+          a:hover { text-decoration: none;}
+          }
+          
+            /*모바일*/
+           @media (max-width:992px){
+          a:link { color: black; text-decoration: none;}
+          a:visited { color: black; text-decoration: none;}
+          a:hover { text-decoration: none;}
+           }
+        </style>
+    </head>
+    
+    
+    <body>
+<!--상단고정 프로필 미리보기(프로필 사진 | 사용자 이름 | 이메일 | 전화번호 )-->
+        <section class="header">
+            <div>
+              <ul>
+                <li class="user-img"><img src="/assets/user.png" alt="프로필 이미지" width="150"></li>
+                <div class="user-info">
+                <li class="user"><%= current_user.name %></li>
+                <li class="welcome"><strong><%=current_user.id%>번째</strong> 가족이 되신걸 환영합니다.</li>
+                </div>
+              </ul>
+            </div>
+         </section>
+<!--상황에 따라 바뀌는 정보들-->
+<!--정보 선택 버튼(|찜게시물 | 내가올린게시물 | 상세프로필|)-->
+
+        <section class="cen" class="section-button">
+            <ul class="tab-list" class="button">
+              <li class="active"><button><a class="tab-control" href="#tab-1">찜 게시물</a></button></li>
+              <li><button><a class="tab-control" href="#tab-2">내가올린 게시물</a></button></li>
+              <li><button><a class="tab-control" href="#tab-3">상세프로필</a></button></li>
+            </ul>
+        </section> 
+        <div id="content">
+            <section class="cen">
+              <div class="tab-panel active" id="tab-1" class="cen">
+    <!--|||[마이페이지 -my_pick]|||-->
+                <!--여기에 찜한 목록 불러와서(@찜박스)보여주기-->
+                <!--페이지네이션-->
+                
+                <%# if @pick == nil%>
+                    <!--게시물 0개이면 보여줄창 만들기-->
+                    <!--<div>-->
+                    <!--    <p>찜한 게시물이 없어요! 등록된 게시물보러가실래요?</p>-->
+                    <!--</div>-->
+                <%# else %>
+                  <p class="b-sub">내 찜: <%=@pick.size %>개</p>
+                
+                  <% @pick.each do |x| %>
+                    <% @pp = Post.where(:id => x.post_id_id) %>
+                     <% @pp.each do |t| %>
+                  <div class="pick-container">
+                      <div class="box">
+                          <div class="img">
+                              <p class="go">보러가기</p>
+                              <a href="#"><img class="opac" src="/assets/back.png" alt"헬스장 이미지" ></a>
+                          </div>
+                          <div class="box-content">
+                              <div class="pic-container-sub">
+                                  <div class="sub"><a href="#"><p><%= t.title%></p></a></div>
+                                                          <!--게시물 업로더의 이름을 가지고오기-->
+                                  <div class="seller"><p><%= t.user_id %></p></div>
+                              </div>
+                              <div class="date">
+                                  <p class="d-1">기간</p>
+                                  <p class="d-2"><%= t.sday %> - <%= t.eday %></p>
+                              </div>
+                              <div class="price">
+                                  <p class="c-1">양도금액</p>
+                                  <p class="c-2"><%= t.money %> Won</p>
+                              </div>
+                              <div class="where">
+                                  <p class="w-1">주소</p>
+                                  <p class="w-2"><%= t.location %></p>
+                              </div>
+                          </div>
+                      </div>
+                <%# end %>
+                      
+                  </div>
+                  <% end %>
+                   <% end %>
+                </div>
+                
+    <!-- |||[마이페이지-mylist]||| -->
+            
+                <div class="tab-panel" id="tab-2" class="cen">
+                  <!--<p class="b-sub">내가 올린 게시글</p>-->
+                  <p class="b-sub"> 내 게시글: <%= @mypost.size %>개</p>
+                  <!--내가 등록한 게시물 보기-->
+                  <% @mypost.each do |x| %>
+                  <div class="upload-container">
+                      <div class="upload-box">
+                          <div class="upload-img">
+                              <a href="#"><img class="opac" src="/assets/back.png" alt"헬스장 이미지"></a>
+                          </div>
+                          <div class="upload-content">
+                              <div class="upload-container-sub">
+                                  <div class="upload-sub">
+                                      <a href="#"><p>
+                                          <%= x.title %>
+                                      </p></a>
+                                  </div>
+                                  <div class="upload-seller"><a href="/posts/<%= x.id %>/edit"><p>수정하러가기</p></a></div>
+                              </div>
+                              <div class="upload-update">
+                                  <p class="d-1">업로드 일</p>
+                                  <p class="d-2"><%= x.sday %> - <%= x.eday %></p>
+                              </div>
+                              <div class="upload-date">
+                                  <p class="d-1">기간</p>
+                                  <p class="d-2"><%= x.sday %> - <%= x.eday %></p>
+                              </div>
+                              <div class="upload-price">
+                                  <p class="c-1">양도금액</p>
+                                  <p class="c-2"><%= x.money %></p>
+                              </div>
+                              <div class="upload-where">
+                                  <p class="w-1">주소</p>
+                                  <p class="w-2"><%= x.location %></p>
+                              </div>
+                              <div class="upload-reply">
+                                  <p class="re-1">댓글</p>
+                                  <p class="re-2">2개</p>
+                              </div>
+                          </div>  
+                      </div>
+                      
+                      <hr>
+                      <!--업로드 박스 2번째 이후-->
+
+                  </div>
+                  <!--내가 올린 게시물 수정할 수 있게 할까-->
+                  <% end %>
+    <!-- |||[마이페이지-profile]||| -->
+                </div>
+               <% @user.each do |x| %>
+                <div class="tab-panel" id="tab-3" class="cen">
+                  <!--<p class="b-sub">상세 프로필들</p>-->
+                  <!--아이디, 성별, 나이-->
+                  <div class="profile-container">
+                    <div class="pro-box" class="pro-email">
+                        <p class="sm-box">이메일</p>
+                        <p class="sm-box-content"><%= x.email %></p>
+                    </div>
+                    <div class="pro-box" class="pro-age">
+                        <p class="sm-box">나이</p>
+                        <p class="sm-box-content"><%=x.age%></p>
+                    </div>
+                    <div class="pro-box" class="pro-gender">
+                        <p class="sm-box">성별</p>
+                        <p class="sm-box-content"><%=x.gender%></p>
+                    </div>
+                  </div>
+                 
+                  <!--디바이스 디비에서 개인정보 불러 오기 id, 유저네임, 이메일-->
+                  <!--개인정보 수정 하기/또는 수정페이지로 연결하기-->
+                  <!-- <a href="/mypage/mypage_edit?id=<%#=p.id%>">수정</a>-->
+                  <% end %>
+                  <center>
+                      <button class="profile-edit" class="ui basic button"><a href="/users/edit">정보수정하기</a></button>
+                  </center><br>
+
+                  <!--<div id="modal-button">-->
+                  <!--  <a>프로필 수정하기</a>-->
+                  <!--</div>-->
+                
+                  <div id="modal-options" class="cen">
+                    <h1 class="modal-content"><a href="/users/adit">프로필 수정하기</a></h1>
+                    <h3>이름</h3>
+                    <h3>전화번호</h3>
+                    <h3>ㅇㅇㅇㅇ</h3> 
+                  </div>
+                </div>
+            </secton>
+        </div>
+
+<!--스크립트-->
+
+
+
+<!--선택 버튼에따라 아래 내용 바뀌는것-->
+<script>
+  $('.tab-list').each(function(){
+  var $this = $(this),
+      $tab = $this.find('li.active'),
+      $link = $tab.find('a'),
+      $panel = $($link.attr('href'));
+
+  $this.on('click', '.tab-control', function(e) {
+    e.preventDefault();
+    var $link = $(this),
+        id = this.hash;
+    
+    if (id && !$link.is('.active')) {
+      $panel.removeClass('active');
+      $tab.removeClass('active');
+
+      $panel = $(id).addClass('active');
+      $tab = $link.parent().addClass('active');
+    }
+  });
+});
+</script>
+
+  <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Modal Test</title>
+    <link rel="stylesheet" href="/modal/modal.css" type="text/css" />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+     crossorigin="anonymous"></script>
+  </head>
+
+<!--모달-->
+    <script>
+      (function(){
+        var $content = $('#modal-options').detach();
+      
+        //modal-button을 누르면(on('click')핸들러) 함수 실행
+        $('#modal-button').on('click', function() { 
+          modal.open({content: $content, width:500, height:300});
+          //modal을 열기 (open은 JSON타입으로 변수 세개를 파라미터를 통해 건네 받음)
+          /* $content : 모달 안에 들어갈 컨텐츠
+             width : 모달 창의 너비
+             height : 모달 창의 높이
+          */
+        });
+      }());
+      </script>
+      
+      <script>
+      var modal = (function() {
+
+      var $window = $(window),
+          $modal = $('<div class="modal"/>'),
+          $content = $('<div class="modal-content"/>'),
+          $close = $('<button role="button" class="modal-close">닫기</button>');
+    
+      $modal.append($content, $close);
+      
+      $close.on('click', function(e){
+        e.preventDefault(); 
+        modal.close();
+      });
+    
+      return {
+        center: function() {
+          var top = Math.max($window.height() - $modal.outerHeight(), 0) / 2,
+              left = Math.max($window.width() - $modal.outerWidth(), 0) / 2;
+          $modal.css({
+            top:top + $window.scrollTop(),
+            left:left + $window.scrollLeft()
+          });
+        },
+        open: function(settings) {
+          $content.empty().append(settings.content);
+    
+          $modal.css({ 
+            width: settings.width || 'auto',
+            height: settings.height || 'auto'
+          }).appendTo('body');
+          
+          modal.center();
+          $(window).on('resize', modal.center);
+        },
+        
+        close: function() {
+          $content.empty();
+          $modal.detach();
+          $(window).off('resize', modal.center);
+        }
+      };
+    }());
+    </script>
+    </body>
+</html>

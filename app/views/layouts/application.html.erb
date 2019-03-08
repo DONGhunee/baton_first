@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Baton Touch</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/app/assets/stylesheets/main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
+  <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+    <link href="/app/assets/stylesheets/agency.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/slick.css"/>
+   <link rel="stylesheet" type="text/css" href="/assets/stylesheets/slick-theme.css"/>
+<script type="text/javascript">
+    function showHide(id) {
+       var obj = document.getElementById(id);
+       if (obj.style.display == 'none')
+           obj.style.display = 'block';
+       else
+           obj.style.display = 'none';
+    }
+</script>
+
+
+
+</head>
+<body>
+ 
+
+<style>
+  @media (max-width:992px){
+    .container{
+      max-width:100%;
+      
+    }
+    .col-sm-12{
+      flex: 0 0 100%;
+      width:100%;
+    }
+    #aaa{
+      
+      max-width:100%;
+      height:auto;
+      width:150px;
+      margin-bottom:50px;
+    }
+    #bbb{
+      width: 100%;
+      height:auto; 
+      max-width:100%;
+    }
+    #imim{
+      width:40%;
+    }
+  }
+   @media (min-width:993px){
+     
+   
+    #ccc {
+        text-align: center;
+    }
+    #ddd {
+        text-align: left;
+        padding-right: 200px;
+    }
+   #imim{
+     width:200px;
+     margin-left: 35px;
+   }
+    #aaa {
+      padding: 30px;
+        text-align: center;
+
+    }
+    #bbb {
+        text-align: left;
+        
+    }
+     
+   }
+</style>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #000000; ">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="/"><img src="/assets/logogo.png" style="width:200px;"></a>
+
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav text-uppercase ml-auto">
+            <% if user_signed_in? %>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="/main/my_page">마이페이지</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="/users/sign_out" data-method="delete">로그아웃</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="/posts/new">양도권 업로드</a>
+            </li>
+            <% else %>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#" data-toggle="modal" data-target="#exampleModal">로그인</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="/users/sign_up" >회원가입</a>
+            </li>
+            
+            <% end %>
+            
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    
+<%= yield %>
+<br><br>
+
+<style>
+      
+</style>
+
+
+<footer >
+
+  <div class="container">
+    <a href="#"><i class="angle double up icon"></i></a>
+    <div class="ui centered grid" style="margin-bottom: 50px;">
+      <div class="eight wide column" id="ccc">
+        
+        <br><br><br>
+        <p><strong>주소</strong> 17104 경기도 용인시 기흥구 덕영대로 1732 </p>
+        <p><strong>custom center</strong> 010-1234-5678 </p>
+        <p><strong>email</strong> abc123@naver.com </p>
+        <p>Copyright ⓒ 2018 Likelion 6  Designed by Baton Touch </p>
+        
+      </div>
+      <center>
+      <div class="eight wide column" id="ddd">
+        <br><br>
+        <p><strong>president</strong> 이동훈</p>
+        <P><strong>designer</strong> 정유진</P>
+        <P><strong>designer</strong> 이진희</P>
+        <P><strong>developer</strong> 민태원</P>
+        <P><strong>developer</strong> 엄지현</P>
+  
+      </div>
+      </center>
+    </div>
+  </div>
+
+    
+    </footer>
+    
+    
+<!-- 로그인 모달창 -->
+<div class="modal fade" style="z-index: 3000;" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <!--여기에 로그인 페이지 붙여넣기-->
+        <div class="ui centered grid" style="margin: 2% 0 0 2%;">
+          <div class="col-xs-12 col-sm-12  col-md-6" id="aaa">
+            <img id="imim" src="/assets/batontouch_yellow.png"/>
+          </div>
+          
+          <div class="col-xs-12 col-sm-12 col-md-6" id="bbb" >
+        
+        <div class="ui basic padded segment">
+          
+        <!--오류나는곳-->
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'ui small form'}) do |f| %>
+  <div class="field">
+    <div class="ui fluid left icon input" >
+      <i class="envelope icon"></i>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "E-mail address" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="ui fluid left icon input">
+      <i class="key icon"></i>
+      <%= f.password_field :password, autocomplete: "off", placeholder: "Password"%>
+    </div>
+  </div>
+  
+  <div class="field">
+      <%= f.submit '로그인', :class => "ui fluid yellow button" %>
+  </div>
+  
+  <div class="field">
+  <button type="button" onclick="location.href= '/users/sign_up' " class="ui fluid yellow button">회원가입</button>
+    <!-- <div id="signup_popup" class="ui fluid yellow button" data-toggle="modal" data-target="#modalsignup">회원가입</div> -->
+  </div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div class="field">
+      <div class="ui toggle checkbox">
+        <%= f.check_box :remember_me %>
+        <label>비밀번호 저장</label>
+      </div>
+    </div>
+  
+    
+  <% end -%>
+
+<% end %>
+<!--여기까지 수정-->
+
+</div>
+<!--회원가입 모달창-->
+    <div class="modal fade2" style="z-index: 3000" id="modalsignup" tabindex="-1" role="dialog" aria-labelledby="modalsignupLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <!--여기에 회원가입 페이지 붙여넣기-->
+  <center>
+   <h2><img class="img_2" src ='/assets/little.png' width='150px'/></h2>
+    </center><br>
+ 
+
+    <center>
+     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {class: "ui large form"}) do |f| %>
+  <%= f.error_notification %>
+
+   <div class="ui input">
+    <%= f.input :name,
+                
+                label: false,
+                required: true,
+                autofocus: true ,
+                placeholder: "name",
+                input_html: { class: 'ui input' }%>
+                </div><br><br>
+                
+                <div class="ui input">
+    <%= f.input :age,
+                required: true,
+                label: false,
+                placeholder: "age",
+                autofocus: true ,
+                input_html: { class: "ui input"}%>
+     </div><br><br>
+     <div class="ui input">
+    <%= f.input :gender, 
+                as: :radio_buttons, 
+                collection: [['여자', 'female'], ['남자', 'male']], 
+                label_method: :second, 
+                value_method: :first,
+                required: true,
+                label: false,
+                autofocus: true ,
+                input_html: { class: "ui input" }%>
+                   </div><br><br>
+            <div class="ui input">    
+    <%= f.input :email,
+                required: true,
+                label: false,
+                placeholder: "email",
+                autofocus: true ,
+                input_html: { class: "ui input" }%>
+                   </div><br><br>
+                <div class="ui input">
+    <%= f.input :password,
+                required: true,
+                label: false,
+                placeholder: "password(more than 6)",
+                input_html: {class: "ui input" } %>
+                   </div><br><br>
+                <div class="ui input">
+    <%= f.input :password_confirmation,
+                required: true,
+                label: false,
+                placeholder: "password_confirmation",
+                input_html: { class: "ui input" } %>
+                   </div><br><br>
+ 
+
+  <div class="form-actions">
+    <%= f.button :submit, "Sign up" %>
+  </div>
+<% end %>
+
+<!--회원가입 모달창 끝 -->
+
+
+
+        </div>
+        
+        <%if false%>
+        <%= render "devise/shared/links" %>
+        <%end%>
+        
+        
+          </div>
+              </div>
+        </div>
+          
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- Plugin JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!-- Custom scripts for this template -->
+    <script src="/assets/agency.min.js"></script>
+    
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="/assets/slick.min.js"></script>
+    
+    
+  <br><br>
+  <hr><br>
+  
+</body>
+</html>

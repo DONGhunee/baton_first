@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+  
+  <head>
+    <meta charset="utf-8">
+      <style>
+          @media (min-width:993px){
+            body{
+              margin-top:150px;
+              margin-left:3%;
+                }
+              }
+          @media (max-width: 992px) {
+            body{
+              margin-top: 90px;
+              margin-left:3%;
+                }
+              }
+      </style>
+  </head>
+  
+ <body>
+
+                 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {class: "ui large form"}) do |f| %>
+  <%= f.error_notification %>
+  
+  <br>
+  
+  <div class="column">
+    <div class="ui grid">
+      <div class="three wide column"></div>
+      <div class="thirteen wide column">
+         <p style="font-weight:light; font-size:27px; color:dark gray;"> 회원정보 수정</p><br><br>
+         <div style="border:2px solid; padding:0px; width:25px;"></div><br><br>
+
+         <p style="font-size:45px; color:dark gray;"> <strong>개인정보</strong>를 <br>수정해주세요</p>
+         
+         <br>
+         
+         
+         
+         
+                             <hr color="black" width="1000px" size="10px" align="left">
+         
+
+
+     <div class="ui form">
+         <div class="inline fields" style="width:1000px; height:60px;">
+             <label style="font-size:15px; font-weight:lighter; color:gray; margin-right:65px">이름</label>
+     <div class="ui left icon input" style="width:350px; height:35px;">
+         <i class="user icon"></i>
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "Name", required: true %>
+        </div>
+      </div>
+     </div>
+     
+     
+                    <hr width="1000px" size="10px" align="left">
+                    
+                    
+                    
+                    
+     <div class="ui form">
+         <div class="inline fields" style="width:1000px; height:60px;">
+             <label style="font-size:15px; font-weight:lighter; color:gray; margin-right:65px">나이</label>
+     <div class="ui left icon input" style="width:350px; height:35px;">
+         <i class="sort numeric up icon"></i>
+        <%= f.number_field :age, autofocus: true, autocomplete: "age", placeholder: "Age", required: true %>
+        </div>
+      </div>
+     </div>
+                    <hr width="1000px" size="10px" align="left">
+                    
+   <div class="ui input">
+                   </div>
+                
+                
+                    
+                                        
+                    
+ <div class="ui form">
+    <div class="inline fields" style="width:1000px;">
+         <label style="font-size:15px; font-weight:lighter; text-align:center; color:gray; margin-right:65px">성별</label>
+            <%= f.input:gender, as: :radio_buttons, collection: [['여자', 'female'], ['남자', 'male']],required: true, input_html: { class: "ui radio" }%>
+
+    </div>
+</div>
+     
+     
+     
+     
+     
+     
+                    <hr width="1000px" size="10px" align="left"><br><br><br><br>
+
+
+                <p style="font-size:20px; color:dark gray;"> <strong>회원정보</strong>를 수정해주세요</p>                    
+                    
+                    
+                             <hr color="black" width="1000px" size="10px" align="left">
+                    
+                    
+     <div class="ui form">
+         <div class="inline fields" style="width:1000px; height:60px;">
+             <label style="font-size:15px; font-weight:lighter; color:gray; margin-right:80px">이메일</label>
+     <div class="ui left icon input" style="width:350px; height:35px;">
+         <i class="envelope icon"></i>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "E-mail", required: true %>
+        </div>
+      </div>
+     </div>
+                    <hr width="1000px" size="10px" align="left">
+
+
+
+     <div class="ui form">
+         <div class="inline fields" style="width:1000px; height:60px;">
+             <label style="font-size:15px; font-weight:lighter; color:gray; margin-right:65px">비밀번호</label>
+     <div class="ui left icon input" style="width:350px; height:35px;">
+         <i class="envelope icon"></i>
+        <%= f.password_field :password, autofocus: true, autocomplete: "off", placeholder: "Password", required: true %>
+        </div>
+      </div>
+     </div>
+                    <hr width="1000px" size="10px" align="left">
+
+
+
+
+     <div class="ui form">
+         <div class="inline fields" style="width:1000px; height:60px;">
+             <label style="font-size:15px; font-weight:lighter; color:gray; margin-right:65px">비밀번호<br>확인</label>
+     <div class="ui left icon input" style="width:350px; height:35px;">
+         <i class="envelope icon"></i>
+        <%= f.password_field :password_confirmation, autofocus: true, autocomplete: "off", placeholder: "Password Confirmation", required: true %>
+        </div>
+      </div>
+     </div>
+                    <hr width="1000px" size="10px" align="left"><br><br><br>
+
+  <div class="form-actions">
+    <%= f.button :submit, "수정 완료" %>
+  </div>
+<% end %>
+
+
+<script>
+    $("document").ready(function(){
+       $("legend").remove(); 
+    });
+</script>
+  

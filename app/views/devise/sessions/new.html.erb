@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <style>
+      @media (max-width:993px){
+ 
+    #aaa {
+        text-align: center;
+    }
+    #bbb {
+        text-align: left;
+        padding-right: 200px;
+    }
+    
+      @media (min-width:992px){
+        
+      }
+</style>
+
+<div class="ui centered grid" style="margin-top: 300px;">
+  <div class="eight wide column" id="aaa">
+
+              <img src="/assets/batontouch_yellow.png" width="230px"/>
+
+        
+        
+        
+      </div>
+  <div class="eight wide column" id="bbb">
+
+
+<div class="ui basic padded segment">
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'ui small form'}) do |f| %>
+  <div class="field">
+    <div class="ui fluid left icon input">
+      <i class="envelope icon"></i>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "E-mail address" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="ui fluid left icon input">
+      <i class="key icon"></i>
+      <%= f.password_field :password, autocomplete: "off", placeholder: "Password"%>
+    </div>
+  </div>
+  
+  <div class="field">
+      <%= f.submit '로그인', :class => "ui fluid yellow button" %>
+  </div>
+  
+  <div class="field">
+    <div id="signup_popup" class="ui fluid yellow button" data-toggle="modal" data-target="#modalsignup">회원가입</div>
+  </div>
+
+    <div class="modal fade" style="z-index: 3000" id="modalsignup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <!--여기에 회원가입 페이지 붙여넣기-->
+  <center>
+  <body> <h2><img src ='/assets/little.png' width='150px'/></h2>
+    </center><br>
+ 
+
+    <center>
+     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {class: "ui large form"}) do |f| %>
+  <%= f.error_notification %>
+
+   <div class="ui input">
+    <%= f.input :name,
+                required: true,
+                autofocus: true ,
+                input_html: { class: 'ui input' }%>
+                </div><br>
+                
+                <div class="ui input">
+    <%= f.input :age,
+                required: true,
+                autofocus: true ,
+                input_html: { class: "ui input"}%>
+     </div><br>
+     <div class="ui input">
+    <%= f.input :gender, 
+                as: :radio_buttons, 
+                collection: [['여자', 'female'], ['남자', 'male']], 
+                label_method: :second, 
+                value_method: :first,
+                required: true,
+                autofocus: true ,
+                input_html: { class: "ui input" }%>
+                   </div><br>
+            <div class="ui input">    
+    <%= f.input :email,
+                required: true,
+                autofocus: true ,
+                input_html: { class: "ui input" }%>
+                   </div><br>
+                <div class="ui input">
+    <%= f.input :password,
+                required: true,
+                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                input_html: {class: "ui input" } %>
+                   </div><br><br>
+                <div class="ui input">
+    <%= f.input :password_confirmation,
+                required: true,
+                input_html: { class: "ui input" } %>
+                   </div>
+ 
+
+  <div class="form-actions">
+    <%= f.button :submit, "Sign up" %>
+  </div>
+<% end %>
+
+
+
+  <% if devise_mapping.rememberable? -%>
+    <div class="field">
+      <div class="ui toggle checkbox">
+        <%= f.check_box :remember_me %>
+        <label>비밀번호 저장</label>
+      </div>
+    </div>
+  
+    
+  <% end %>
+
+<% end %>
+</div>
+
+<%if false%>
+<%= render "devise/shared/links" %>
+<%end%>
+
+
+  </div>
+      </div>
+</div>
+    
+    
+<br><br><br><br><br>

@@ -1,0 +1,220 @@
+
+
+<style>
+
+.tt .t1{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.tt .t2{
+    margin-left:5%;
+}
+
+@media (min-width:993px){
+    
+     #pic{
+         width:65px;
+         height:65px;
+     }
+     #hi{
+         width:750px;
+     }
+     
+     #c1{
+      margin-top:105px;
+  }
+  td{
+      padding:10px;
+     
+  }
+ 
+ .col-md-6 img{
+      float:left;
+      
+  }
+  .col-md-6{
+      margin-bottom:25px;
+  }
+  .col-md-6 p{
+      
+      padding-top:27px;
+      height:100px;
+      vertical-align:middle;
+      padding-left:10%;
+      float:left;
+      font-size: 25px;
+      font-weight: bold;
+  }
+ 
+} 
+   @media (max-width:992px){
+       .container{
+           width:100%;
+           
+       }
+     #c1{
+        margin-top:69px;
+        
+    }
+     #pic{
+         width:30px;
+         height:30px;
+     }
+     #hi{
+         width:300px;
+     }
+     
+ .col-md-6  p{
+      padding-top:27px;
+      height:100px;
+      vertical-align:middle;
+      
+       font-size: 20px;
+       font-weight: bold;
+  }
+  
+ 
+} 
+.col-md-6 img{
+    width:75px;
+    height:75px;
+    
+}
+
+
+.col-xs-1{
+    width:50%;
+}
+</style>
+
+<center>
+<div id="c1" class="container">
+    <% if @post.image.present? %>
+        <img id="hi" src="<%= @post.image.url %>" style="width:100% margin-up:100px;">
+    <% end %>
+</div>
+</center>
+
+<br><br>
+<div class="container">
+    <p style="font-size:25px; font-weight:bold; color:#FCCF54;padding-left:5%"><%= @post.ty %></p>
+    <p style="font-size:50px;font-weight:bold;padding-left:5%"><%= @post.title %></p>
+    <p style="font-size:18px; color:#848484;padding-left:5%"><%= @post.location %></p>
+</div>
+<br><br><br>
+<div class="container" >
+    <div class="tt" style="margin-left:10%;">
+        <p class="t1">이용 기간</p>
+        <p class="t2"><%= @post.sday %> ~ <%= @post.eday %></p>
+        <p class="t1">양도 기간</p>
+        <p class="t2"><%= @post.sday %> ~ <%= @post.eday %></p>
+        <!--<p class="t1">원가</p>
+        <p class="t2">1,000,000원</p> -->
+        <p class="t1">판매가</p>
+        <p class="t2"><%= @post.money %>원</p>
+        
+
+        <p class="t1">전화 번호</p>
+        
+        
+        
+
+                
+        <p class="t2">
+                <button class="ui basic button" onclick="document.location.href='<%= @post.tel %>'"> <a href="tel:<%= @post.tel %>"><%= @post.tel %> 로 전화걸기</a>  </button>
+        </p>
+        
+
+        
+        <p class="t1">편의시설</p>
+        <div class="container" style="padding-left:5%">
+        <div class="row" style="width:100%;">
+            <% if @post.f_rocker == "on" %>
+                <div class="col-xs-1 col-sm-6 col-md-6"><img id="pic" src="/assets/key.png"><p>보관 시설</p></div>
+             <% end %>
+              <% if @post.f_parking== "on" %>
+                <div class="col-xs-1 col-sm-6 col-md-6"><img id="pic" src="/assets/parking.png"><p>주차 시설</p></div>
+             <% end %>
+              <% if @post.f_clothes == "on" %>
+                <div class="col-xs-1 col-sm-6 col-md-6"><img id="pic" src="/assets/shirts.png"><p>운동복 대여</p></div>
+             <% end %>
+              <% if @post.f_shower == "on" %>
+                <div class="col-xs-1 col-sm-6 col-md-6"><img id="pic" src="/assets/ta.png"><p>샤워 시설</p></div>
+             <% end %>
+              <% if @post.f_wifi== "on" %>
+                <div class="col-xs-1 col-sm-6 col-md-6"><img id="pic" src="/assets/wifi.png"><p>무선 인터넷</p></div>
+             <% end %>
+          
+        </div>
+        </div>
+      
+    </div>
+</div>
+
+<center>
+<div class="ui form" style="width:1000px; height:250px; padding: 50px;">
+  <div class="field">
+    <textarea style="font-size:17px; font-color:gray;"><%= @post.content %></textarea>
+  </div></div></center>
+    
+
+<br><br>
+<div class="container" style=" width:80%;">
+    <h2>시설의 위치를 확인해 보세요</h2>
+</div>
+<br>
+<div class="container">
+    <% if @post.lat.present? %>
+        <div id="map" style="height:400px; width:100%;"></div>
+    <% else %>
+        <h3 style="text-align:center;">위치 정보가 없습니다.</h3>
+    <% end %>
+</div>
+<br><br>
+
+
+<div class="container" style="text-align:center; margin-top:">
+    <% if user_signed_in? %>
+      <% if @post.user_id.to_i == current_user.id %>
+       <div style="display:inline-block;"><button class="ui button"><%= link_to '수정', edit_post_path(@post) %></button></div>
+      <% end %>
+    <% end %>
+    <div style="display:inline-block;">
+        <button class="ui black button"><%= link_to '뒤로가기', :back %></button>
+    </div>
+    <div style="display:inline-block">
+        <% if user_signed_in? %>
+          <form action="/main/pick">
+           <input type="hidden" name="post_id" value= <%= @post.id %> >
+           <input type="submit" value="찜하기" class="ui yellow button">
+          </form>
+        <% end %>
+    </div>
+</div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b5a7ee0065f76f4f7ae106a301a8fa9c&libraries=services"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new daum.maps.LatLng('<%= @post.lat %>', '<%= @post.lng %>'), // 지도의 중심좌표
+        draggable: false,
+        level: 3 // 지도의 확대 레벨
+    };
+
+var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+// 마커가 표시될 위치입니다 
+var markerPosition  = new daum.maps.LatLng('<%= @post.lat %>', '<%= @post.lng %>'); 
+
+// 마커를 생성합니다
+var marker = new daum.maps.Marker({
+    position: markerPosition
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);
+
+</script>
+<!-- 
+
+-->
